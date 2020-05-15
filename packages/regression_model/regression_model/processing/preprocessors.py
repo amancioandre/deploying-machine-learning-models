@@ -139,10 +139,10 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
         # Check if transformer introduces NaN
         if X[self.variables].isnull().any().any():
             null_counts = X[self.variables].isnull().any()
-            vars_ = {key: valye for (key, value)
-                     in null_counts.items() if valye is True}
+            vars_ = {key: value for (key, value)
+                     in null_counts.items() if value is True}
             raise ValueError(
-                f"Categorical encoder as introduced NaN when " f"transforming categorical variables: {vars_.keys()}")
+                f"Categorical encoder has introduced NaN when " f"transforming categorical variables: {vars_.keys()}")
 
         return X
 
