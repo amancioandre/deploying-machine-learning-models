@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 
+from regression_model.processing.errors import InvalidModelInputError
+
 
 class CategoricalImputer():
     """Categorical data missing value imputer."""
@@ -141,7 +143,7 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
             null_counts = X[self.variables].isnull().any()
             vars_ = {key: value for (key, value)
                      in null_counts.items() if value is True}
-            raise ValueError(
+            raise InvalidModelInputError(
                 f"Categorical encoder has introduced NaN when " f"transforming categorical variables: {vars_.keys()}")
 
         return X
